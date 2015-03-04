@@ -1,0 +1,8 @@
+<%- if devise_mapping.omniauthable? %>
+  <%- resource_class.omniauth_providers.each do |provider| %>
+  	<div class="col-md-6 col-sm-12">
+  	<% icon = "fa-#{provider}" %>
+    <%= link_to "<i class='fa #{icon}'></i>&nbsp; Sign in with #{provider.to_s.titleize}".html_safe, omniauth_authorize_path(resource_name, provider), :class => "btn btn-#{provider} btn-social btn-block" %>
+   	</div>
+  <% end -%>
+<% end -%>

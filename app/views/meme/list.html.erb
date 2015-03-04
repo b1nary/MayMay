@@ -1,0 +1,99 @@
+<% title = "Latest memes" %>
+<% title = "Most viewed memes today" if @sort == :views_day %>
+<% title = "Most viewed memes this week" if @sort == :views_week %>
+<% title = "Most viewed memes this month" if @sort == :views_month %>
+<%
+addextra = ApplicationHelper.build_parameter params, [
+  { :uri => "q", :param => :search },
+  { :uri => "sort", :param => :sort },
+  { :uri => "limit", :param => :limit },
+]
+%>
+<% meta title: title,
+        description: "Latest memes from maymay.in. View the latest and most popular user generated memes from MayMay!",
+        keywords: ["MayMays", "memes", "meme list", "best memes", "newest memes", "todays best memes", "best memes this week", "best memes this month"],
+        og: { url: "#{ApplicationHelper.url}/memes#{addextra}" },
+        twitter: { url: "#{ApplicationHelper.url}/memes#{addextra}" }
+%>
+<div class="container well text-center">
+  <div class="page-header">
+    <h1>Looking for some specific memes? Try our search.</h1>
+  </div>
+  <p class="lead" style="margin-top:-1em">
+    <input type="text" class="form-control form-block" id="meme_list_search_text" placeholder="Some maymay text..." value="<%= params[:q] %>">
+  </p>
+  <button type="button" id="meme_list_search" class="btn btn-primary pull-right">Search</button>
+
+  <div class="input-group">
+    <div class="input-group-addon">Sort by</div>
+    <select id="sort_by" class="pull-left" style="font-size:140%; padding:8px;" class="form-control">
+      <option value="views_day" <% if @sort == :views_day %>selected="selected"<% end %>>Best today</option>
+      <option value="views_week" <% if @sort == :views_week %>selected="selected"<% end %>>Best this week</option>
+      <option value="views_month" <% if @sort == :views_month %>selected="selected"<% end %>>Best this month</option>
+      <option value="views" <% if @sort == :views %>selected="selected"<% end %>>Best ever</option>
+      <option value="created_at" <% if @sort == :created_at %>selected="selected"<% end %>>Newest</option>
+    </select>
+  </div>
+
+  <small class="text-center" title="Some images may not be shown due to caching indifferences">Memes <%= @offset %> - <%= @offset+@maymays.count %> of <%= @maymay_count %> memes in the database</small>
+</div>
+
+<div class="container">
+
+  <div class="row">
+  <%= render "layouts/responsive_ad" %>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h1><%= title %></h1>
+      <br />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <script type="text/javascript">
+      var $maymays = []
+      <% @maymays.each do |meme| %>
+        <% if File.exists? "#{Rails.root}/public/gen/medium___#{meme.filename}" %>
+        <% alt = meme.top
+           alt = meme.bottom if alt == "" or alt == " "
+        %>
+        $maymays.push({ alt: '<%= alt %>', filename: '<%= meme.filename %>', id32: '<%= ApplicationHelper.id32(meme.id) %>' })
+        <% end %>
+      <% end %>
+      </script>
+      <div id="memewall">
+
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+    <%
+   	page = @page
+   	page = 0 if page.nil?
+   	sort = @sort
+   	sort = "newest" if sort == :created_at
+   	page_minus = page-1
+   	page_minus = 0 if page_minus < 0
+    if @meme.nil?
+    	_back_path = memes_with_page_path(page_minus)
+    	_next_path = memes_with_page_path(page+1)
+    else
+    	_back_path = memes_with_meme_and_page_path(@meme,page_minus)
+    	_next_path = memes_with_meme_and_page_path(@meme,  page+1)
+    end
+    %>
+    <% if @page != 0 %>
+    <a href="<%= _back_path %><%= addextra %>" class="btn btn-primary pull-left"><i class="fa fa-backward"></i>&nbsp; Back</a>
+    <% end %>
+    <% if @page < @max_pages %>
+    <a href="<%= _next_path %><%= addextra %>" class="btn btn-primary pull-right">More &nbsp;<i class="fa fa-forward"></i></a>
+    <% end %>
+    </div>
+  </div>
+
+</div>

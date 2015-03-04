@@ -1,0 +1,38 @@
+<% meta title: 'File not found (404)',
+   		robots: 'noindex' 
+%>
+
+<div class="container text-center well">
+  <div class="page-header">
+  	<br/>
+    <h1>Requested document not found :/ (404)</h1>
+    <br/>
+  </div>
+</div>
+
+<div class="container text-center">
+	<div class="row">
+		<div class="col-md-12">
+		<h3>May some memes can help your path?</h3>
+		<br/>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<script type="text/javascript">
+			var $maymays = []
+				<% GeneratedMeme.order("RAND()").limit(12).each do |meme| %>
+					<% if File.exists? "#{Rails.root}/public/gen/medium___#{meme.filename}" %>
+						<% alt = meme.top
+							alt = meme.bottom if alt == "" or alt == " "
+						%>
+			$maymays.push({ alt: '<%= alt %>', filename: '<%= meme.filename %>', id32: '<%= ApplicationHelper.id32(meme.id) %>' })
+					<% end %>
+				<% end %>
+			</script>
+			<div id="memewall">
+			</div>
+		</div>
+	</div>
+</div>

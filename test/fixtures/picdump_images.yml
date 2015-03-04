@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  picdump_id: 1
+  title: MyString
+  source: MyString
+
+two:
+  picdump_id: 1
+  title: MyString
+  source: MyString

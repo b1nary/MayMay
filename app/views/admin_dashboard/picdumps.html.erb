@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="page-header">
+  	<%= link_to 'Upload images', admin_dashboard_upload_path, :class => "btn btn-success pull-right" %>
+    <h1>Picdump Manager</h1>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+  	<% @images.each do |img| %>
+    <div class="col-sm-6 col-lg-3">
+		<input type="checkbox" name="add_image" id="si_<%= img.id %>" value="<%= img.id %>" class="picdump_select_item"/>
+		Added <%= time_ago_in_words( img.created_at ) %> ago
+		<span class="pull-right"><%= link_to "Delete", delete_picdump_image_path(img.id),
+			onclick: "return confirm('Are you sure you want to delete this item?');" %></span>
+		<label class="img" for="si_<%= img.id %>">
+			<%= image_tag img.img.url(:medium), alt: img.title, class: 'image-responsive' %>
+		</label>
+    </div>
+    <% end %>
+  </div>
+</div>

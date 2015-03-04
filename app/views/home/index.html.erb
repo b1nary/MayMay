@@ -1,0 +1,112 @@
+<% meta title: "Next generation meme generator",
+        description: "MayMay is your next generation meme generator. Generate memes easily on the fly while earning magical internet points!",
+        keywords: ["MayMay", "Next generation meme generator", "meme generator", "maymay generator"]
+%>
+<div class="container well text-center">
+  <div class="page-header">
+    <h1>Ready for the next generation meme generator?</h1>
+  </div>
+  <p class="lead" style="margin-top:-1em">Sometimes a meme can say more than thousand images. And with MayMay you do that faster than ever :)</p>
+
+  <p>Follow us on &nbsp;<a href="https://twitter.com/maymay_in" id="gh" target="_blank" title="Twitter"><span class="fa-stack fa-lg">
+    <i class="fa fa-square-o fa-stack-2x"></i>
+    <i class="fa fa-twitter fa-stack-1x"></i>
+  </span>
+  Twitter</a>
+  &nbsp; and &nbsp;
+  <a href="https://www.facebook.com/maymaymemes"  target="_blank" title="Facebook"><span class="fa-stack fa-lg">
+    <i class="fa fa-square-o fa-stack-2x"></i>
+    <i class="fa fa-facebook fa-stack-1x"></i>
+  </span>
+  Facebook</a></p>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 overflow-hidden">
+    <%= render "layouts/responsive_ad" %>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-lg-6">
+      <h2><i class="fa fa-paper-plane"></i>&nbsp; Generate memes on the fly</h2>
+      <br /><br />
+      <img class="img-responsive" src="/images/how.png" alt="How to direct meme on maymay.in">
+      <br />
+      <br />
+      <p>You dont have to visit our site to generate memes, all you have to do is to remember
+        the domain and some of the meme slugs and you can just type away to embed your image macro
+        responses wherever you currently are.</p>
+    </div>
+
+    <div class="col-sm-12 col-lg-5 col-lg-offset-1">
+      <h2><i class="fa fa-star"></i>&nbsp; Earn magical internet points!</h2>
+      <br/>
+      <p>Each time someone views a meme url from you, you earn a point. Each point is worth exactly 1 magical point.
+      Points will mark you as famous and experienced user, as someone everybody loves!</p>
+
+      <br/>
+      <div class="row">
+        <div class="col-md-6 col-xs-12">
+          <%= link_to "<i class='fa fa-twitter'></i>&nbsp; Sign in with Twitter".html_safe, user_omniauth_authorize_path("twitter"), :class => "btn btn-twitter btn-social btn-block" %>
+        </div>
+        <div class="col-md-6 col-xs-12">
+          <%= link_to "<i class='fa fa-facebook'></i>&nbsp; Sign in with Facebook".html_safe, user_omniauth_authorize_path("facebook"), :class => "btn btn-facebook btn-social btn-block" %>
+        </div>
+        <div class="col-md-6 col-xs-12">
+          <%= link_to "<i class='fa fa-reddit'></i>&nbsp; Sign in with Reddit".html_safe, user_omniauth_authorize_path("reddit"), :class => "btn btn-reddit btn-social btn-block" %>
+        </div>
+        <div class="col-md-6 col-xs-12">
+          <%= link_to "<i class='fa fa-github'></i>&nbsp; Sign in with Github".html_safe, user_omniauth_authorize_path("github"), :class => "btn btn-github btn-social btn-block" %>
+        </div>
+      </div>
+      <br />
+      <p><strong>Also ads start to decrease for users with at least 100 points</strong></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12 overflow-hidden" style="max-height:140px">
+    <br/>
+    <%= render "layouts/responsive_ad" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <h2 class="page-header">Todays top memes</h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <script type="text/javascript">
+      var $maymays = []
+      <% cache "index_home", :expires_in => 10.minutes do %>
+        <% GeneratedMeme.order(:views_day => :desc, :created_at => :desc).limit(12).each do |meme| %>
+          <% if File.exists? "#{Rails.root}/public/gen/medium___#{meme.filename}" %>
+          <% alt = meme.top
+             alt = meme.bottom if alt == "" or alt == " "
+          %>
+          $maymays.push({ alt: '<%= alt %>', filename: '<%= meme.filename %>', id32: '<%= ApplicationHelper.id32(meme.id) %>' })
+          <% end %>
+        <% end %>
+      <% end %>
+      </script>
+      <div id="memewall">
+
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <a href="/memes/?sort=views_day" class="btn btn-lg btn-primary pull-right">More of todays top</a>
+    </div>
+  </div>
+
+
+</div>

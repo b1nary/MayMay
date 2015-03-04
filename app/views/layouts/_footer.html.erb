@@ -1,0 +1,72 @@
+<div class="footer-wrapper">
+  <footer class="container">
+
+    <div class="col-lg-2 col-xs-6">
+      <h3>Meme lists:</h3>
+      <ul>
+        <li><a href="/memes?sort=newest"><i class="fa fa-check"></i> Newest</a></li>
+        <li><a href="/memes?sort=views_day"><i class="fa fa-check"></i> Todays best</a></li>
+        <li><a href="/memes?sort=views_week"><i class="fa fa-check"></i> Weeks best</a></li>
+        <li><a href="/memes?sort=views_month"><i class="fa fa-check"></i> Months best</a></li>
+      </ul>
+    </div>
+
+    <div class="col-lg-2 col-xs-6">
+      <h3>Pages:</h3>
+      <ul>
+        <li><a href="/about"><i class="fa fa-coffee"></i> About</a></li>
+        <li><a href="/api"><i class="fa fa-file"></i> API docs</a></li>
+        <li><a href="/top_users"><i class="fa fa-users"></i> Top users</a></li>
+        <li><a href="/memes"><i class="fa fa-star"></i> Memes</a></li>
+        <li><a href="/memes/templates"><i class="fa fa-star-o"></i> Meme templates</a></li>
+      </ul>
+      <br style="clear:both;" />
+    </div>
+
+    <div class="col-lg-5 col-md-8 col-xs-12">
+      <h3>Random Memes</h3>
+      <div class="row">
+        <% GeneratedMeme.order("RAND()").limit(3).each do |maymay|
+        title = maymay.top
+        title = maymay.bottom if title == "" or title == " " %>
+        <div class="col-xs-4">
+          <a href="/info/<%= ApplicationHelper.id32(maymay.id) %>">
+            <img src="/gen/small___<%= maymay.filename %>" alt="<%= title %>" class="img-responsive" />
+          </a>
+        </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-4 col-xs-12">
+      <h3>Contact:</h3>
+      <p>Have a question or feedback?<br>Or wishing a new template?</p>
+      <p><a href="mailto:info@maymay.in" title="Contact us!"><i class="fa fa-envelope"></i> info(at)maymay.in</a></p>
+      <h3>Follow:</h3>
+
+
+      <a href="https://twitter.com/maymay_in" id="gh" target="_blank" title="Twitter"><span class="fa-stack fa-lg">
+        <i class="fa fa-square-o fa-stack-2x"></i>
+        <i class="fa fa-twitter fa-stack-1x"></i>
+      </span>
+      Twitter</a>
+      <a href="https://www.facebook.com/maymaymemes"  target="_blank" title="Facebook"><span class="fa-stack fa-lg">
+        <i class="fa fa-square-o fa-stack-2x"></i>
+        <i class="fa fa-facebook fa-stack-1x"></i>
+      </span>
+      Facebook</a>
+
+    </div>
+    <br style="clear:both;"/>
+
+    <hr>
+
+    <div class="col-lg-12">
+      <br />
+      <p style="text-align:center;">Copyright © MayMay.in &nbsp; | &nbsp; <a href="/privacy-policy">Privacy Policy</a> &nbsp; | &nbsp; <a href="/terms-of-use">Terms of Use</a></p>
+    </div>
+    <br /><br />
+
+
+  </footer>
+</div>

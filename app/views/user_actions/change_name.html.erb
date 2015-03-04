@@ -1,0 +1,21 @@
+<% meta title: 'Change name' %>
+<div class="container">
+  <div class="page-header">
+    <h1>Change name</h1>
+    <p class="lead">You can change your nickname <strong>once</strong> to personalize your account.</p>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <p><strong>ONCE!</strong> Please think twice, once you pressed the button you cant change it again!</p>
+      <div class="input-group">
+        <input type="text" id="newname" class="form-control" value="<%= current_user.name %>" />
+        <div class="input-group-addon"><i id="newname_icon" class="fa fa-bolt"></i></div>
+      </div>
+      <br />
+      <button class="btn btn-primary pull-right" id="save_newname" disabled="disabled"><i class="fa fa-floppy-o"></i> Save name</button>
+
+      <br /><br /><br /><br />
+    </div>
+  </div>
+</div>

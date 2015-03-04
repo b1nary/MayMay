@@ -1,0 +1,2 @@
+module PicdumpsHelper
+end

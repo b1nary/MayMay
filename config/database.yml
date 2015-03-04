@@ -1,0 +1,23 @@
+development:
+  adapter: mysql2
+  encoding: utf8
+  database: <%= Rails.application.config.app_name.downcase %>_development
+  username: <%= ENV['DATABASE_USER'] %>
+  password: <%= ENV['DATABASE_PASS'] %>
+  host: <%= ENV['DATABASE_HOST'] %>
+
+test:
+  adapter: mysql2
+  encoding: utf8
+  database: <%= Rails.application.config.app_name.downcase %>_test
+  username: <%= ENV['DATABASE_USER'] %>
+  password: <%= ENV['DATABASE_PASS'] %>
+  host: <%= ENV['DATABASE_HOST'] %>
+
+production:
+  adapter: mysql2
+  encoding: utf8
+  database: <%= Rails.application.config.app_name.downcase %>_production
+  username: <%= ENV['DATABASE_USER'] %>
+  password: <%= ENV['DATABASE_PASS'] %>
+  host: <%= ENV['DATABASE_HOST'] %>

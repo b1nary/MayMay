@@ -1,0 +1,67 @@
+<% meta title: 'Admin Dashboard' %>
+<div class="container">
+  <div class="page-header">
+    <h1>Admin Dashboard <small>Random stuff & more</small></h1>
+  </div>
+
+  <div class="row">
+
+    <div class="col-md-3 col-sm-12">
+      <h3>Site stats</h3>
+      <table class="table">
+        <tr><td>Meme templates</td><td>
+          <strong title="Count: <%= Meme.count %>">
+          <%= ApplicationHelper.number_format( Meme.count ) %></strong>
+        </td></tr>
+        <tr><td>Meme slugs</td><td>
+          <strong title="Count: <%= MemeSlug.count %>">
+          <%= ApplicationHelper.number_format( MemeSlug.count ) %></strong>
+        </td></tr>
+        <tr><td>Generated Memes</td><td>
+          <strong title="Count: <%= GeneratedMeme.count %>">
+          <%= ApplicationHelper.number_format( GeneratedMeme.count ) %></strong>
+        </td></tr>
+        <tr><td>Registered Users</td><td>
+          <strong title="Count: <%= User.count %>">
+          <%= ApplicationHelper.number_format( User.count ) %></strong>
+        </td></tr>
+        <tr><td>Admins</td><td>
+          <strong title="Count: <%= User.where(:admin => true).count %>">
+          <%= ApplicationHelper.number_format( User.where(:admin => true).count ) %></strong>
+        </td></tr>
+      </table>
+    </div>
+
+    <div class="col-md-3 col-sm-12">
+      <h3>View stats</h3>
+      <table class="table">
+        <tr><td>Views today</td><td>
+          <strong title="Count: <%= GeneratedMeme.sum("views_day") %>">
+          <%= ApplicationHelper.number_format( GeneratedMeme.sum("views_day") ) %></strong>
+        </td></tr>
+        <tr><td>Views this week</td><td>
+          <strong title="Count: <%= GeneratedMeme.sum("views_week") %>">
+          <%= ApplicationHelper.number_format( GeneratedMeme.sum("views_week") ) %></strong>
+        </td></tr>
+        <tr><td>Views this month</td><td>
+          <strong title="Count: <%= GeneratedMeme.sum("views_month") %>">
+          <%= ApplicationHelper.number_format( GeneratedMeme.sum("views_month") ) %></strong>
+        </td></tr>
+        <tr><td>All views</td><td>
+          <strong title="Count: <%= GeneratedMeme.sum("views") %>">
+          <%= ApplicationHelper.number_format( GeneratedMeme.sum("views") ) %></strong>
+        </td></tr>
+      </table>
+    </div>
+
+    <div class="col-md-3 col-sm-12">
+      c
+    </div>
+
+    <div class="col-md-3 col-sm-12">
+      <%= link_to "Upload Picdump Image", admin_dashboard_upload_path, :class => "btn btn-success btn-block" %>
+      <%= link_to "Create new Picdump", admin_dashboard_picdumps_path, :class => "btn btn-info btn-block" %>
+    </div>
+
+  </div>
+</div>

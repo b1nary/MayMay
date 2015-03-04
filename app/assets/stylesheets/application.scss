@@ -1,0 +1,158 @@
+//@import "bootstrap-sprockets";
+//@import "bootstrap";
+@import "social";
+@import "admin_dashboard";
+
+body {
+	padding-top:60px;
+}
+
+.navbar-brand {
+	font-family: Lobster;
+	font-size: 2.0em;
+	font-weight: 500;
+
+	img {
+		max-height: 36px;
+		margin-top:-4px;
+	}
+}
+.navbar-inverse .navbar-nav>li>a {
+	color:#f5f5f5;
+}
+
+.alert {
+	text-align:center;
+	border-radius:0;
+}
+
+.form-generator {
+	input {
+		margin-bottom:0.5em;
+	}
+	label { font-weight: 400; }
+}
+
+#image_preview_container {
+	position:relative;
+	.loading {
+		display:none;
+		position:absolute;
+		left:0; right:0;
+		bottom:0; top:0;
+		background-color:rgba(40,40,40,0.4);
+		text-align:center;
+		img { margin-top:5em; }
+	}
+}
+
+#memewall {
+	.wall-item {
+		padding-left:0.4em;
+		padding-right:0.4em;
+		padding-bottom:0.8em;
+		width:33.3%;
+
+		@media screen and (max-width: 720px){
+			width:50%;
+		}
+		@media screen and (max-width: 520px){
+			width:100%;
+		}
+	}
+	.wall-item.hidden { display:none; }
+}
+
+#start-carousel {
+	margin-top:2em;
+	margin-bottom:2em;
+	width:100%;
+	height:200px;
+	background-color:#e5e5e5;
+	padding-top:2em;
+	padding-bottom:2em;
+	box-shadow: inset 0px 0px 8px #999;
+	> div {
+		max-height:100%;
+		img {
+			height:144px;
+			max-height:100%;
+			margin-right:1.6em;
+			border:5px solid #f5f5f5;
+		}
+	}
+
+}
+
+strong { font-weight:500; }
+
+.meme-item {
+	margin-bottom:0em;
+	position:relative;
+	overflow:hidden;
+	padding-left:0em;
+	padding-right:0em;
+	margin-bottom:0.6em;
+	font-size:90%;
+
+	img { max-width:100%; }
+
+	.sub {
+		position:absolute;
+		bottom:-26px; left:0; right:0;
+		text-align:center;
+		padding:0.2em;
+		color:#f5f5f5;
+		height:26px;
+		background-color:#222;
+		background-color:rgba(0,0,0,.5);
+		transition:all .2s ease-in-out;
+	}
+
+	&:hover {
+		.sub { bottom:0px; }
+	}
+
+	&.meme-crop {
+		height:130px;
+		a {
+			overflow:hidden;
+			display:block;
+			position:relative;
+			width: 100%;
+			height: 0;
+			padding-bottom: 50%;
+
+			background-repeat: no-repeat;
+			background-position: center center;
+			background-size: cover;
+		}
+	}
+}
+
+.footer-wrapper {
+	background-color:#e5e5e5;
+	padding-top:1.5em;
+	margin-top:3em;
+}
+footer {
+	margin-top:2em;
+	span { font-family:Lobster; font-weight:500; }
+
+	ul { margin:0; padding:0; list-style:none; }
+	ul li i { width:1.2em; }
+	a { color:#445; }
+	a:hover { color:#666; }
+}
+
+.nav-item-main a {
+	background-color: #31b0d5;
+	color: #f5f5f5!important;
+	&:hover {
+		background-color:#1b8dbb!important;
+	}
+}
+
+.overflow-hidden {
+	overflow: hidden!important;
+}

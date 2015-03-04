@@ -1,0 +1,158 @@
+<% meta title: "The MayMay API docs",
+        keywords: ["MayMay API", "API docs", "Generator API", "Image info API", "Meme list API", "User API"],
+        og: { url: "#{ApplicationHelper.url}/api" }
+%>
+<div class="container">
+  <div class="page-header">
+    <h1>MayMay API docs</h1>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <p class="lead">MayMay comes with a fully featured api. Basically <strong>MayMay is a API</strong>.
+        Most dynamic pages allow you to append .json to the url (or instead of .jpg) and you will get a
+        fitting result in the JSON format. This obviously wont work for content pages like the api docs.</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h4>Topics:</h4>
+      <div class="col-md-12">
+        <li><a href="#generator_api">Generator API</a></li>
+        <li><a href="#image_info_api">Image info API</a></li>
+        <li><a href="#meme_list_api">Meme list API</a></li>
+        <li><a href="#user_api">User API</a></li>
+        <li><a href="#limits">Limits</a></li>
+        <li><a href="#rules">Rules</a></li>
+      </div>
+    </div>
+  </div>
+
+  <section class="row" id="generator_api">
+    <div class="col-md-12">
+      <br />
+      <h2>Generator API</h2>
+      <p class="lead">The generator API allows you to generate memes on the fly.
+        Note that this works with the url filetypes .json, .png, .jpg, ... or just nothing. JSON will result in a
+        JSON format anything else will just result in an image.</p>
+
+      <h4>Basic Example</h4>
+      <code>curl http://maymay.in/doge/much_api.json</code><br /><br />
+      <script src="https://gist.github.com/b1nary/0636b455a0f391ff5e8c.js?file=generate_meme.json"></script>
+
+      <br />
+      <h4>Control text lines</h4>
+      <p>The above example only uses the top row, you can use the <strong>second row</strong> as well by adding another "path"</p>
+      <code>curl http://maymay.in/doge/much_api/second_line.json</code><br /><br />
+      <p>To have a <strong>empty top</strong> row just add a space or the "_" character</p>
+      <code>curl http://maymay.in/doge/_/such_api.json</code><br /><br />
+      <p>It interprets <strong>url encoding</strong>, so the following example would be correct</p>
+      <code>http://maymay.in/doge/M%C3%A4%C3%A4%C3%A4%C3%A4hhh%20M%C3%BC%C3%BChhh.jpg</code><br /><br />
+    </div>
+  </section>
+
+  <section class="row" id="image_info_api">
+    <div class="col-md-12">
+      <br />
+      <h2>Image info API</h2>
+      <p class="lead">The image view API gives you further information about images. It works by appending .json to a meme info
+      page.</p>
+
+      <h4>Basic Example</h4>
+      <code>curl http://maymay.in/info/3m.json</code><br /><br />
+      <script src="https://gist.github.com/b1nary/0636b455a0f391ff5e8c.js?file=image_info.json"></script>
+
+    </div>
+  </section>
+
+  <section class="row" id="meme_list_api">
+    <div class="col-md-12">
+      <br />
+      <h2>Meme list API</h2>
+      <p class="lead">The meme list allows you to query memes in different ways. Note that memes will be listed that probably dont exist anymore as image. If you will link to them over one of the links it will be regenerated.</p>
+
+      <h4>Basic Example</h4>
+      <code>curl http://maymay.in/memes.json</code><br /><br />
+      <script src="https://gist.github.com/b1nary/0636b455a0f391ff5e8c.js?file=memes.json"></script>
+
+      <br />
+      <h4>Searching</h4>
+      <p>You can search for words and phrases in memes, use the search parameter</p>
+      <code>curl http://maymay.in/memes.json?q=api</code><br /><br />
+
+      <h4>Search by meme</h4>
+      <p>You may also filter the memes by their main slug (fat one in template/generator view).</p>
+      <code>curl http://maymay.in/memes/doge.json</code><br /><br />
+
+      <h4>Limit</h3>
+      <p>You can limit the results with the limit parameter. The maximum is 100.</p>
+      <code>curl http://maymay.in/memes.json?limit=5</code><br /><br />
+
+      <h4>Sorting</h4>
+      <p>There are several sorting filters: views | views_day | views_week | views_month | newest (or nothing, it is default)</p>
+      <code>curl http://maymay.in/memes.json?sort=views</code><br /><br />
+
+      <h4>Pagination</h4>
+      <p>Naturally you also can move to other pages so you can reach more then 100 records.</p>
+      <code>curl http://maymay.in/memes/4.json</code><br /><br />
+      <p>Or if filerting also by memes</p>
+      <code>curl http://maymay.in/memes/doge/4.json</code><br /><br />
+
+      <h4>Common URL structure</h4>
+      <code>curl http://maymay.in/memes/:meme/:page?limit=N&q=Query&sort=views</code>
+    </div>
+  </section>
+
+  <section class="row" id="user_api">
+    <div class="col-md-12">
+      <br />
+      <h2>User API</h2>
+      <p class="lead">The user API allows you to query information about the user AND their meme list.</p>
+
+      <h4>Basic Example</h4>
+      <code>curl curl http://maymay.in:/user/anon1000.json</code><br /><br />
+      <script src="https://gist.github.com/b1nary/0636b455a0f391ff5e8c.js?file=user.json"></script>
+
+      <br />
+      <h4>Searching</h4>
+      <p>You can search for words and phrases in memes, use the search parameter</p>
+      <code>curl http://maymay.in/user/anon1000.json?search=api</code><br /><br />
+
+      <h4>Limit</h3>
+      <p>You can limit the results with the limit parameter. The maximum is 100.</p>
+      <code>curl http://maymay.in/user/anon1000.json?limit=5</code><br /><br />
+
+      <h4>Sorting</h4>
+      <p>There are several sorting filters: views | newest (or nothing, it is default)</p>
+      <code>curl http://maymay.in/user/anon1000.json?sort=views</code><br /><br />
+
+      <h4>Pagination</h4>
+      <p>Naturally you also can move to other pages so you can reach more then 100 records.</p>
+      <code>curl http://maymay.in/user/anon1000.json?page=4</code><br /><br />
+    </div>
+  </section>
+
+  <section class="row" id="limits">
+    <div class="col-md-12">
+      <br />
+      <h2>Limits</h2>
+      <p class="lead">We dont enforce any specific limits, but spammy behaviour will be automatically banned. Also cloudflare might
+      limits the amount of requests. To be save just make sure to have a ok sleep time between requests and nothing should happen.
+      Just dont be surprised when cloudflare decides to present you some captcha, that does mean you were to fast.
+      <br/><br/>
+      <small><em>I might update this later with more specific infos.</em></small></p>
+    </div>
+  </section>
+
+  <section class="row" id="rules">
+    <div class="col-md-12">
+      <br />
+      <h2>Rules</h2>
+      <p class="lead">You may use our api freely. Except for commercial purposes. If you are unsure if you are using it commercially
+      dont hesitate to ask. It is not allowed to use it in applications which sole purpose is racism or other inflammatory behavior.
+      We may expand this rules anytime.</p>
+    </div>
+  </section>
+
+</div>

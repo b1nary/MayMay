@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyText
+  keywords: MyString
+  fame: 1
+  fame_day: 1
+  fame_week: 1
+  fame_month: 1
+
+two:
+  title: MyString
+  description: MyText
+  keywords: MyString
+  fame: 1
+  fame_day: 1
+  fame_week: 1
+  fame_month: 1

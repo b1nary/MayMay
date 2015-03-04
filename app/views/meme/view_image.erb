@@ -1,0 +1,109 @@
+<%
+    desc = @meme.top
+    desc = @meme.bottom if desc == "" or desc == " "
+    creator = @meme.user.name if !@meme.user.nil?
+    creator = "anyanon" if creator == "" or creator.nil?
+    meta title: "#{@meme.meme.title} meme by #{creator}",
+        description: "#{desc}. #{@meme.meme.title} meme generator.",
+        keywords: ["#{@meme.meme.title} meme", "#{@meme.meme.title} meme generator", "#{@meme.meme.title}", "#{@meme.top.downcase}", "#{@meme.bottom.downcase}", "memes"],
+        og: {
+          image: "#{@url}" ,
+          url: "#{ApplicationHelper.url}/info/#{ApplicationHelper.id32(@meme.id)}"
+        },
+        twitter: {
+          url: "#{ApplicationHelper.url}/info/#{ApplicationHelper.id32(@meme.id)}",
+          card: "summary_large_image",
+          image: {
+            src: "#{@url}"
+          }
+        }
+%>
+<div class="container">
+  <div class="page-header">
+    <h1><%= @meme.meme.title %>
+      <small>by
+        <% if !@meme.user_id.nil? and @meme.user_id != 0 and !@meme.user.nil? %><%= link_to @meme.user.name, view_user_path(@meme.user.name) %>
+        <% else %>anyanon<% end %>
+      </small>
+    </h1>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12 col-lg-8">
+      <%= render "layouts/responsive_ad" %>
+      <img class="img-responsive" src="/gen/<%= @meme.filename %>" alt="How to direct meme on maymay.in">
+
+      <br />
+      <%= render "layouts/responsive_ad" %>
+    </div>
+    <div class="col-sm-12 col-lg-4">
+      <%= link_to "Generate own #{@meme.meme.title} Meme", generator_path(ApplicationHelper.get_meme_slug(@meme)), :class => "btn btn-primary btn-block" %>
+      <%= link_to "View other #{@meme.meme.title} Meme", memes_with_meme_and_page_path(ApplicationHelper.get_meme_slug(@meme), 0), :class => "btn btn-info btn-block" %>
+
+      <% if @my_image %>
+      <%= link_to 'Delete this Meme', delete_maymay_path(@meme.id),
+        :class => "btn btn-danger btn-block",
+        :onclick => "return confirm('Are you sure? The meme will be removed from our Database, all views and infos lost.')" %>
+      <% end %>
+
+      <br/>
+      <% if @meme.top and @meme.top != "" and @meme.top != " " %>
+        <h4>Top text:</h4>
+        <p><%= @meme.top %></p>
+      <% end %>
+      <% if @meme.bottom and @meme.bottom != "" and @meme.bottom != " " %>
+        <h4>Bottom text:</h4>
+        <p><%= @meme.bottom %></p>
+      <% end %>
+      <br />
+
+      <h4>Share this meme</h4>
+        <a  title="Share on Twitter" target="_blank" id="gen_share_twitter"
+            href="https://twitter.com/intent/tweet?text=<%= desc %>&url=<%= @short_url %>&via=MayMay_in">
+            <span class="fa-stack fa-lg">
+              <i class="fa fa-square fa-stack-2x"></i>
+              <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+            </span>
+        </a>
+        <a  title="Share on Reddit" target="_blank" id="gen_share_reddit"
+            href="http://www.reddit.com/submit?url=<%= @short_url %>&title=<%= desc %>">
+            <span class="fa-stack fa-lg">
+              <i class="fa fa-square fa-stack-2x"></i>
+              <i class="fa fa-reddit fa-stack-1x fa-inverse"></i>
+            </span>
+        </a>
+        <a  title="Share on Google+" target="_blank" id="gen_share_google"
+            href="https://plus.google.com/share?url=<%= @short_url %>&title=<%= desc %>">
+            <span class="fa-stack fa-lg">
+              <i class="fa fa-square fa-stack-2x"></i>
+              <i class="fa fa-google-plus fa-stack-1x fa-inverse"></i>
+            </span>
+        </a>
+        <a  title="Share on Facebook" target="_blank" id="gen_share_facebook"
+            href="https://www.facebook.com/sharer/sharer.php?u=<%= @short_url %>">
+            <span class="fa-stack fa-lg">
+              <i class="fa fa-square fa-stack-2x"></i>
+              <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+            </span>
+        </a>
+
+      <br />
+      <br/>
+
+      <h4>Views</h4>
+      <table class="table">
+        <tr><td>Today</td><td><strong><%= @meme.views_day %></strong></td></tr>
+        <tr><td>Week</td><td><strong><%= @meme.views_week %></strong></td></tr>
+        <tr><td>Month</td><td><strong><%= @meme.views_month %></strong></td></tr>
+        <tr><td>All</td><td><strong><%= @meme.views %></strong></td></tr>
+      </table>
+
+      <h4>Image URL</h4>
+      <input type="text" class="form-control" value="<%= @url %>" onClick="this.setSelectionRange(0, this.value.length)">
+      <h4>Short URL</h4>
+      <input type="text" class="form-control" value="<%= @short_url %>" onClick="this.setSelectionRange(0, this.value.length)">
+    </div>
+  </div>
+
+
+</div>

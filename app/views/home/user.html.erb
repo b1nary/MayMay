@@ -1,0 +1,70 @@
+<%
+   meta title: "#{@user.name} on MayMay",
+        description: "User #{@user.name} and his generated memes on MayMay",
+        keywords: ["#{@user.name}", "#{@user.name} memes", "#{@user.name} meme generator"],
+        canonical: "#{ApplicationHelper.url}/user/#{@user.name}",
+        og: { url: "#{ApplicationHelper.url}/user/#{@user.name}" },
+        twitter: { url: "#{ApplicationHelper.url}/user/#{@user.name}" }
+%>
+<div class="container">
+  <div class="page-header">
+    <h1>User: <%= @user.name %></h1>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <big>
+        <table class="table">
+          <tr><td>Points</td><td><strong><%= @user.points %></strong></td></tr>
+          <tr><td>Memes</td><td><strong><%= @memecount %></strong></td></tr>
+        </table>
+      </big>
+    </div>
+  </div>
+
+  <div class="page-header">
+    <select id="sort_by" class="pull-right">
+      <option value="newest" <% if @sort == :created_at %>selected="selected"<% end %>>Newest</option>
+      <option value="most_popular" <% if @sort == :views %>selected="selected"<% end %>>Most popular</option>
+    </select>
+
+    <% if @sort == :created_at %>
+    <h2>Latest memes by <%= @user.name %></h2>
+    <% else %>
+    <h2>Best memes by <%= @user.name %></h2>
+    <% end %>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <script type="text/javascript">
+      var $maymays = []
+      <% cache "user_#{@user.name}", :expires_in => 10.minutes do %>
+        <% @maymays.each do |meme| %>
+          <% if File.exists? "#{Rails.root}/public/gen/medium___#{meme.filename}" %>
+          <% alt = meme.top
+             alt = meme.bottom if alt == "" or alt == " "
+          %>
+          $maymays.push({ alt: '<%= alt %>', filename: '<%= meme.filename %>', id32: '<%= ApplicationHelper.id32(meme.id) %>' })
+          <% end %>
+        <% end %>
+      <% end %>
+      </script>
+      <div id="memewall">
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <% addsort = ""; addsort = "&sort=#{params['sort']}" if params['sort'] %>
+      <% if @page != 0 %>
+      <a href="/user/<%= @user.name %>?page=<%= (@page) %><%= addsort %>" class="btn btn-primary pull-left"><i class="fa fa-backward"></i>&nbsp; Back</a>
+      <% end %>
+      <% if (@page * @image_count) < @memecount %>
+      <a href="/user/<%= @user.name %>?page=<%= (@page + 2) %><%= addsort %>" class="btn btn-primary pull-right">More &nbsp;<i class="fa fa-forward"></i></a>
+      <% end %>
+    </div>
+  </div>
+
+</div>

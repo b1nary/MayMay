@@ -1,0 +1,27 @@
+<%
+   meta title: "MayMay meme templates",
+        description: "All our meme templates for our MayMay meme generator",
+        keywords: ["meme templates", "meme generator", "meme generator templates"],
+        og: { url: "#{ApplicationHelper.url}/templates" },
+        twitter: { url: "#{ApplicationHelper.url}/templates" }
+%>
+<div class="container">
+  <div class="page-header">
+    <h1>All meme templates</h1>
+  </div>
+
+  <div class="row">
+  <% cache("meme_templates", :expires_in => 10.minutes) do %>
+    <% Meme.order(fame_day: :desc).each do |meme| %>
+    <div class="col-sm-2 col-xs-4 wall-item">
+      <div class="meme-item">
+        <a href="<%= generator_path(MemeSlug.where(:meme_id => meme.id).order(main: :desc).first.slug) %>">
+          <img class="img-responsive" src="<%= meme.img.url(:medium) %>" alt="<%= meme.title %>">
+          <div class="sub"><%= meme.title %></div>
+        </a>
+      </div>
+    </div>
+    <% end %>
+  <% end %>
+  </div>
+</div>

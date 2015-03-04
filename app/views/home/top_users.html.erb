@@ -1,0 +1,21 @@
+<% meta title: "Top 100 users",
+        description: "The 100 top uploaders and contributors from MayMay. Beeing on this list means fame and a glorious future! Dont forget to mention it on your resume!",
+        keywords: ["top users", "top 100 users", "top uploaders", "top contributers", "maymay users"],
+        og: { url: "#{ApplicationHelper.url}/top_users" },
+        twitter: { url: "#{ApplicationHelper.url}/top_users" }
+%>
+<div class="container">
+  <div class="page-header">
+    <h1>Top 100 users</h1>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table">
+      <% User.order(points: :desc).limit(100).each do |user| %>
+        <tr><td><%= user.name %></td><td><strong><%= ApplicationHelper.number_format(user.points.to_i) %></strong></td></tr>
+      <% end %>
+      </table>
+    </div>
+  </div>
+</div>
