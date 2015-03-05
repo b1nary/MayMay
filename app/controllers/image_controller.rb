@@ -180,6 +180,7 @@ class ImageController < ApplicationController
           views_month: 1
         }
 
+        # Fame counting on meme basis
         meme.fame = 0 if meme.fame.nil?
         meme.fame_day = 0 if meme.fame_day.nil?
         meme.fame_week = 0 if meme.fame_week.nil?

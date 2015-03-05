@@ -1,12 +1,14 @@
+# encoding: utf-8 
+
 namespace :cron do
   desc "Daily cron job"
   task daily: :environment do
-    last = JSON.parse(File.read(Rails.root+"config/cron.json"))
+    last = JSON.parse(File.read(Rails.root+"config/cron.json", :encoding => "UTF-8"))
     GeneratedMeme.update_all( "views_day = 0" )
     if last["week"] != Date.today.cweek
       last["week"] = Date.today.cweek
       GeneratedMeme.update_all( "views_week = 0" )
-      File.open(Rails.root+"config/cron.json", "w") do |f|
+      File.open(Rails.root+"config/cron.json", "w", :encoding => "UTF-8") do |f|
         f.write( last.to_json )
       end
     end
@@ -14,7 +16,7 @@ namespace :cron do
     if last["month"] != Date.today.month
       last["month"] = Date.today.month
       GeneratedMeme.update_all( "views_month = 0" )
-      File.open(Rails.root+"config/cron.json", "w") do |f|
+      File.open(Rails.root+"config/cron.json", "w", :encoding => "UTF-8") do |f|
         f.write( last.to_json )
       end
     end
@@ -33,7 +35,7 @@ namespace :cron do
       mandrill = Mandrill::API.new 'szbLIY9tRHQYRRtD0AWp6g'
 
       puts "yay (social)"
-      social = JSON.parse(File.read(Rails.root+"config/social.json"))
+      social = JSON.parse(File.read(Rails.root+"config/social.json", :encoding => "UTF-8"))
 
       new_meme = nil
       memes = GeneratedMeme.order(:views_day => :desc, :views_week => :desc, :views_month => :desc, :views => :desc).limit(20)
@@ -43,7 +45,7 @@ namespace :cron do
 
       if !new_meme.nil?
         social << new_meme.id
-        File.open(Rails.root+"config/social.json", "w") do |f|
+        File.open(Rails.root+"config/social.json", "w", :encoding => "UTF-8") do |f|
           f.write(social.to_json)
         end
 
