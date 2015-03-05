@@ -61,7 +61,6 @@ Rails.application.routes.draw do
   get ':meme/:top/:bottom' => 'image#check', :as => "image_generator_top_bottom"
   get ':meme/:top' => 'image#check', :as => "image_generator_top"
 
-
   match '/404', to: 'errors#e404', via: :all
   match '/422', to: 'errors#e422', via: :all
   match '/500', to: 'errors#e500', via: :all

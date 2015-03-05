@@ -79,6 +79,8 @@ class HomeController < ApplicationController
         @meme = @meme_slug.first.meme
         @meme_slugs = MemeSlug.where(:meme_id => @meme.id)
         @main_slug = @meme_slugs.order(main: :desc).first
+      else
+        redirect_to '/404'
       end
     else
       @is_rand = true

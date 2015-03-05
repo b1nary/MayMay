@@ -28,3 +28,6 @@
 # Puma sock file
 puma.sock
 puma.pid
+
+# Locked gemfile
+Gemfile.lock
