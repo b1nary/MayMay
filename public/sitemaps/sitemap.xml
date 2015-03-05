@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<sitemap>
+<loc>http://maymay.in/sitemaps/site.xml</loc>
+</sitemap>
+<sitemap>
+<loc>http://maymay.in/sitemaps/about.xml</loc>
+</sitemap>
+<sitemap>
+<loc>http://maymay.in/sitemaps/api.xml</loc>
+</sitemap>
+<sitemap>
+<loc>http://maymay.in/sitemaps/login.xml</loc>
+</sitemap>
+<sitemap>
+<loc>http://maymay.in/sitemaps/templates.xml</loc>
+</sitemap>
+<sitemap>
+<loc>http://maymay.in/sitemaps/generator.xml</loc>
+</sitemap>
+<sitemap>
+<loc>http://maymay.in/sitemaps/memes.xml</loc>
+</sitemap>
+<sitemap>
+<loc>http://maymay.in/sitemaps/memes_list.xml</loc>
+</sitemap>
+<sitemap>
+<loc>http://maymay.in/sitemaps/top_users.xml</loc>
+</sitemap>
+<sitemap>
+<loc>http://maymay.in/sitemaps/terms_of_use.xml</loc>
+</sitemap>
+<sitemap>
+<loc>http://maymay.in/sitemaps/privacy_policy.xml</loc>
+</sitemap>
+</sitemapindex>

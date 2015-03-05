@@ -64,6 +64,9 @@ gem 'bcrypt', '~> 3.1.7'
 # Use Unicorn as the app server
 gem 'unicorn'
 
+# Exactly what it sounds like
+gem "dynamic_sitemaps"
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
