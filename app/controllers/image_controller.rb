@@ -13,20 +13,16 @@ class ImageController < ApplicationController
     top = (params[:top] || '').upcase.gsub('_',' ')
     bottom = (params[:bottom] || '').upcase.gsub('_',' ')
 
-    if params[:meme].downcase != "s"
-      meme_slug = MemeSlug.where(:slug => params[:meme].downcase)
-      if meme_slug.nil? or meme_slug.size < 1
-        redirect_to '/404'
-      end
-    end
 
     if params[:meme].downcase == "s"
+      # top contains our meme id in this case
       gen_meme = GeneratedMeme.where(:id => ApplicationHelper.id10(params[:top]).to_i).first
       meme = gen_meme.meme
       top = (gen_meme.top.chomp || '').upcase.gsub('_',' ')
       bottom = (gen_meme.bottom.chomp || '').upcase.gsub('_',' ')
     else
-      meme = meme_slug.first.meme
+      meme_slug = MemeSlug.where(:slug => params[:meme].downcase)
+      meme = meme_slug.first.meme if meme_slug.size > 0
     end
 
     if !meme.nil?
