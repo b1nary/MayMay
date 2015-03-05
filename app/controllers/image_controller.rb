@@ -71,6 +71,7 @@ class ImageController < ApplicationController
         user_hash: Digest::MD5.hexdigest(request.remote_ip),
         generated_meme_id: gen_meme.id
       )
+
       gen_meme.views += 1
       gen_meme.views_day += 1
       gen_meme.views_week += 1
@@ -178,6 +179,18 @@ class ImageController < ApplicationController
           views_week: 1,
           views_month: 1
         }
+
+        meme.fame = 0 if meme.fame.nil?
+        meme.fame_day = 0 if meme.fame_day.nil?
+        meme.fame_week = 0 if meme.fame_week.nil?
+        meme.fame_month = 0 if meme.fame_month.nil?
+
+        meme.fame += 1
+        meme.fame_day += 1
+        meme.fame_week += 1
+        meme.fame_month += 1
+        meme.save
+
         if user_signed_in?
           new_maymay[:user_id] = current_user.id
         else
