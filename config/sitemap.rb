@@ -30,6 +30,10 @@ end
 sitemap_for Meme.all, name: :memes_list do |meme|
   slug = meme.meme_slugs.order(main: :desc).limit(1).first.slug
   url memes_with_meme_and_page_path(slug, 0)
+end
+
+sitemap_for Meme.all, name: :memes_generator_list do |meme|
+  slug = meme.meme_slugs.order(main: :desc).limit(1).first.slug
   url generator_path(slug)
 end
 

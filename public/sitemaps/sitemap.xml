@@ -25,6 +25,9 @@
 <loc>http://maymay.in/sitemaps/memes_list.xml</loc>
 </sitemap>
 <sitemap>
+<loc>http://maymay.in/sitemaps/memes_generator_list.xml</loc>
+</sitemap>
+<sitemap>
 <loc>http://maymay.in/sitemaps/top_users.xml</loc>
 </sitemap>
 <sitemap>
